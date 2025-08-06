@@ -4,58 +4,68 @@
 
 <h1 align="center">🧠 ModelSync</h1>
 <p align="center">
-  Um sistema de versionamento moderno para projetos de Inteligência Artificial.
+  A modern versioning system for Artificial Intelligence projects.
 </p>
 
 ---
 
-## 🚀 Visão Geral
+## 🚀 Overview
 
-**ModelSync** é uma ferramenta de controle de versão distribuído, inspirada no Git, mas totalmente voltada para o ecossistema de Inteligência Artificial.
+**ModelSync** is a distributed version control tool inspired by Git, but entirely focused on the Artificial Intelligence ecosystem.
 
-Enquanto o Git é ótimo para versionar código, ele falha quando lidamos com:
-- 🗂️ Datasets grandes
-- 🧠 Modelos treinados (binários)
-- 🧪 Experimentos com múltiplos parâmetros
-- 📈 Métricas de desempenho e comparações
+While Git is great for versioning code, it fails when dealing with:
+- 🗂️ Large datasets
+- 🧠 Trained models (binaries)
+- 🧪 Experiments with multiple parameters
+- 📈 Performance metrics and comparisons
 
-O objetivo do **ModelSync** é preencher essa lacuna, oferecendo um ambiente de versionamento orientado a dados e experimentos.
+The goal of **ModelSync** is to fill this gap, offering a data and experiment-oriented versioning environment.
 
 ---
 
-## 🧰 Tecnologias Utilizadas
+## 🧰 Technologies Used
 
-| Componente | Tecnologia |
+| Component | Technology |
 |-----------|-------------|
 | CLI       | [Typer](https://github.com/tiangolo/typer) |
 | API       | [FastAPI](https://fastapi.tiangolo.com) |
 | Server    | [Uvicorn](https://www.uvicorn.org/) |
 | Git       | [GitPython](https://gitpython.readthedocs.io/) |
-| Dados     | [Pandas](https://pandas.pydata.org/) |
+| Data      | [Pandas](https://pandas.pydata.org/) |
 | Container | [Docker](https://www.docker.com/) |
 
 ---
 
-## ⚙️ Funcionalidades do MVP
+## ⚙️ MVP Features
 
-- `modelsync init` → Inicializa um repositório `.modelsync/`
-- `modelsync commit -m "mensagem"` → Salva um snapshot com metadados
-- Versionamento simples com hash dos arquivos
-- API básica para consultas e interações externas
+- `modelsync init` → Initializes a `.modelsync/` repository
+- `modelsync commit -m "message"` → Saves a snapshot with metadata
+- Simple versioning with file hashing
+- Basic API for queries and external interactions
 
 ---
 
-## 📦 Como Usar
+## 📦 How to Use
 
-### ✅ Pré-requisitos
+### ✅ Prerequisites
 
 - Python 3.10+
-- Linux, macOS ou Windows (WSL recomendado)
+- Linux, macOS or Windows (WSL recommended)
 
-### 🔧 Instalação
+### 🔧 Installation
 
 ```bash
-git clone https://github.com/seu-usuario/modelsync.git
+git clone https://github.com/your-username/modelsync.git
 cd modelsync
 pip install -r requirements.txt
+```
 
+### 🧪 CLI Usage
+
+```bash
+# Initialize ModelSync repository
+python modelsync/cli/main.py init
+
+# Create a commit with message
+python modelsync/cli/main.py commit -m "Model with 92% accuracy"
+```
