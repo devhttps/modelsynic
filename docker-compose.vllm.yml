@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  modelsync-vllm:
+    build:
+      context: .
+      dockerfile: Dockerfile.vllm
+    ports:
+      - "8001:8001"  # vLLM API
+      - "8000:8000"  # ModelSync API
+      - "8080:8080"  # Web interface
+    volumes:
+      - .:/app
+      - modelsync-data:/app/.modelsync
+      - vllm-models:/app/models
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTHONPATH=/app
+      - VLLM_USE_MODELSCOPE=False
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    command: ["python3", "-m", "modelsync.llm.vllm_api"]
+
+  modelsync-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8000"  # ModelSync API standalone
+    volumes:
+      - .:/app
+      - modelsync-data:/app/.modelsync
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    command: ["python3", "-m", "modelsync.api.main"]
+
+  modelsync-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"  # Web interface standalone
+    volumes:
+      - .:/app
+      - modelsync-data:/app/.modelsync
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    command: ["python3", "-m", "modelsync.web.app"]
+
+volumes:
+  modelsync-data:
+  vllm-models:
