@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  modelsync-api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - modelsync-data:/app/data
+    command: ["python", "modelsync/api/main.py"]
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+
+  modelsync-cli:
+    build: .
+    volumes:
+      - .:/app
+      - modelsync-data:/app/data
+    command: ["python", "modelsync/cli/main.py", "--help"]
+    environment:
+      - PYTHONPATH=/app
+    profiles:
+      - cli
+
+volumes:
+  modelsync-data:
